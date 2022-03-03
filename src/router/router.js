@@ -7,7 +7,7 @@ const Routers = () => {
     <Routes>
       <Route path='/microNg/*' element={<MicroNg />} />
       <Route path='/microReact/*' element={<MicroReact />} />
-      {/* <Route path='/' element={<Navigate to='/microNg' />} /> */}
+      <Route path='/' element={<Navigate to='/microReact' />} />
     </Routes>
   )
 }

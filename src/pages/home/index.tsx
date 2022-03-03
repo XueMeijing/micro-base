@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import classnames from 'classnames'
 import microApp from '@micro-zoe/micro-app'
 
@@ -7,58 +7,37 @@ import './index.less'
 
 const tabArr = [
   {
-    name: '子应用microNg',
+    name: '子应用1 page1',
     tab: 'home',
-    hash: '/main/home',
+    hash: '/main/page1',
     path: '/microNg',
     icon: 'fm-home',
     iconActive: 'fm-home2'
   },
   {
-    name: '子应用microReact',
+    name: '子应用1 page2',
+    tab: 'test',
+    hash: '/main/page2',
+    path: '/microNg',
+    icon: 'fm-home',
+    iconActive: 'fm-home2'
+  },
+  {
+    name: '子应用2 expenses',
     tab: 'expenses',
     hash: '/main/expenses',
     path: '/microReact',
     icon: 'fm-feiyong',
     iconActive: 'fm-feiyong2'
-  },
-  // {
-  //   name: '单据',
-  //   tab: 'reimbursements',
-  //   hash: '/main/reimbursements//',
-  //   path: '/microNg',
-  //   icon: 'fm-baoxiao',
-  //   iconActive: 'fm-baoxiao2'
-  // },
-  // {
-  //   name: '审批',
-  //   tab: 'approvals',
-  //   hash: '/main/approvals//',
-  //   path: '/microNg',
-  //   icon: 'fm-shenpi',
-  //   iconActive: 'fm-shenpi2'
-  // },
-  // {
-  //   name: '审核',
-  //   tab: 'audits',
-  //   hash: '/main/audits/',
-  //   path: '/microNg',
-  //   icon: 'fm-audit-outline',
-  //   iconActive: 'fm-audit-inline'
-  // },
-  // {
-  //   name: '我的',
-  //   tab: 'me-setting',
-  //   hash: '/main/me-setting',
-  //   path: '/microNg',
-  //   icon: 'fm-wode',
-  //   iconActive: 'fm-wode2'
-  // }
+  }
 ]
 
 const Index = () => {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<string>()
+
+  const baseLocation = useLocation()
+  console.log('baseLocation', baseLocation)
 
   return (
     <ul className='base-tabs'>
@@ -72,13 +51,16 @@ const Index = () => {
             })}
             onClick={() => {
               setActiveTab(item.tab);
-              navigate(`${item.path}`)
-              microApp.setGlobalData({
-                type: item.path === '/microNg' ? 'micro-app-ng' : 'micro-app-react',
-                data: {
+              if (window.location.hash.indexOf(item.path) === -1) {
+                navigate(`${item.path}`)
+              }
+              microApp.setData(
+                item.path === '/microNg' ? 'micro-app-ng' : 'micro-app-react',
+                {
+                  type: 'switchTab',
                   path: item.hash
                 }
-              })
+              )
             }}
           >
             <i

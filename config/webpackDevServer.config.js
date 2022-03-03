@@ -127,32 +127,42 @@ module.exports = function (proxy, allowedHost) {
       app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
     },
     // proxy: [
-      // {
-      //   context: ['/main'],
-      //   target: "http://localhost:8100/",
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     "^/main": ""
-      //   }
-      // },
-      // {
-      //   context: ['/js', '/lib', '/dist', '/cordova', '/__ionic', '/i18n', '/css', '/img'],
-      //   target: "http://localhost:8100/"
-      // },
-      // {
-      //   context: ['/fonts'],
-      //   target: "http://localhost:8100/",
-      //   pathRewrite: {
-      //     "^/fonts": "/css/fonts"
-      //   }
-      // },
-      // {
-      //   context: ['/microNg/i18n/'],
-      //   target: "http://localhost:8100/",
-      //   pathRewrite: {
-      //     "^/microNg/i18n/": "/i18n/"
-      //   }
-      // }
+    //   {
+    //     context: ['/main'],
+    //     target: "http://localhost:8100/",
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       "^/main": ""
+    //     }
+    //   },
+    //   {
+    //     context: ['/js', '/lib', '/dist', '/cordova', '/__ionic', '/i18n', '/css', '/img'],
+    //     target: "http://localhost:8100/"
+    //   },
+    //   {
+    //     context: ['/fonts'],
+    //     target: "http://localhost:8100/",
+    //     pathRewrite: {
+    //       "^/fonts": "/css/fonts"
+    //     }
+    //   },
+    //   {
+    //     context: ['/microNg/i18n/'],
+    //     target: "http://localhost:8100/",
+    //     pathRewrite: {
+    //       "^/microNg/i18n/": "/i18n/"
+    //     }
+    //   }
     // ]
+    proxy: [
+      {
+        context: ['/views'],
+        target: "http://localhost:7105/",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/views": "/views"
+        }
+      }
+    ]
   };
 };

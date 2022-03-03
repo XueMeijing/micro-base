@@ -1,30 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import microApp from '@micro-zoe/micro-app';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 microApp.start({
-  disableScopecss: true, // 不设置true点击事件无效
-  destroy: true,
-  lifeCycles: {
-    created (e) {
-      console.log('created')
-    },
-    beforemount (e) {
-      console.log('beforemount')
-    },
-    mounted (e) {
-      console.log('mounted')
-    },
-    unmount (e) {
-      console.log('unmount')
-    },
-    error (e) {
-      console.log('error')
-    }
-  }
+  disableScopecss: false, // 不设置true点击事件无效
 });
 
 ReactDOM.render(
